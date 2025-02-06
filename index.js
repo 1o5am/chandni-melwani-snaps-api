@@ -1,3 +1,35 @@
+import express from "express";
+import cors from "cors";
+import 'dotenv/config';
+import photoRoutes from "./routes/photosRoutes.js";
+import tagRoutes from "./routes/tagsRoutes.js";
+
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use("/photos", photoRoutes);
+app.use("/tags", tagRoutes);
+app.get("/", (req, res) => {
+    res.send("API is running");
+});
+
+
+// app.get("/photos/:id", function (req, res) {
+//     const { photoID } = req.params;
+//     console.log(photoID, photos);
+//     const photo = photos.find((photo) => photo.id === photoID);
+//     res.json(photoID);
+// });
+// app.use("/photos/:id/comments", photoRoutes) 
+
+
+app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
+});
+
 // import express from "express";
 // import fs from "fs";
 // import cors from "cors"; // Allow cross-origin requests
@@ -81,25 +113,25 @@
 //     console.log(`Server is running on http://localhost:${PORT}`);
 // });
 
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const PORT = process.env.PORT || 8080;
+// const express = require('express');
+// const cors = require('cors');
+// const app = express();
+// const PORT = process.env.PORT || 8080;
 
-const photosRoutes = require('./routes/photos');
-const tagsRoutes = require('./routes/tags');
+// const photosRoutes = require('./routes/photos');
+// const tagsRoutes = require('./routes/tags');
 
-app.use(cors());
-app.use(express.json()); // Ensures JSON request handling
+// app.use(cors());
+// app.use(express.json()); // Ensures JSON request handling
 
-// Register routes
-app.use('/photos', photosRoutes);
-app.use('/tags', tagsRoutes);
+// // Register routes
+// app.use('/photos', photosRoutes);
+// app.use('/tags', tagsRoutes);
 
-app.get('/', (req, res) => {
-    res.send("API is running... Use /photos, /tags, etc.");
-});
+// app.get('/', (req, res) => {
+//     res.send("API is running... Use /photos, /tags, etc.");
+// });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server running on http://localhost:${PORT}`);
+// });
